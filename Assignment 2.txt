@@ -1,0 +1,8 @@
+1) Cnum is the primary key in Customer table because it's the only value that is unique and not repeating.
+
+2) 4th column: Rating
+
+3) Row: tuple
+   Column: attribute
+
+4)because in RDBMS rows in table doesn't store sequentially in DB server.

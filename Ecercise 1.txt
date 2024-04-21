@@ -1,0 +1,130 @@
+Exercise 1.
+
+Display all the data from the S table.
+
+mysql> select * from S;
++------+-----------+--------+--------+
+| S#   | Sname     | Status | City   |
++------+-----------+--------+--------+
+| S1   | Supplier1 |     10 | London |
+| S2   | Supplier2 |     20 | Paris  |
+| S3   | Supplier3 |     30 | Athens |
++------+-----------+--------+--------+
+
+Display only the S# and SNAME fields from the S table
+
+mysql> select `S#`, Sname from S;
++------+-----------+
+| S#   | Sname     |
++------+-----------+
+| S1   | Supplier1 |
+| S2   | Supplier2 |
+| S3   | Supplier3 |
++------+-----------+
+
+Display the PNAME and COLOR from the P table for the CITY=”London”
+
+mysql> Select Pname, Color from P
+    -> where city ="London";
++-------+-------+
+| Pname | Color |
++-------+-------+
+| Part1 | Red   |
++-------+-------+
+
+Display all the Suppliers from London
+
+mysql> select Sname from S
+    -> where city ="London";
++-----------+
+| Sname     |
++-----------+
+| Supplier1 |
++-----------+
+
+Display all the Suppliers from Paris or Athens
+
+mysql> select Sname, city from S
+    -> where city in ("Paris","Athens");
++-----------+--------+
+| Sname     | city   |
++-----------+--------+
+| Supplier2 | Paris  |
+| Supplier3 | Athens |
++-----------+--------+
+
+Display all the Projects in Athens
+
+mysql> select Jname from J
+    -> where city ="Athens";
++----------+
+| Jname    |
++----------+
+| Project1 |
++----------+
+
+Display all the Partnames with the weight between 12 and 14 (inclusive of both).
+
+mysql> select pname, weight from P where weight between 12 and 14;
++-------+--------+
+| pname | weight |
++-------+--------+
+| Part1 |     14 |
+| Part2 |     12 |
+| Part3 |     14 |
++-------+--------+
+
+Display all the Suppliers with a Status greater than or equal to 20.
+
+mysql> select sname from S where status >= 20;
++-----------+
+| sname     |
++-----------+
+| Supplier2 |
+| Supplier3 |
++-----------+
+
+Display all the Suppliers except the Suppliers from London. 
+
+mysql> Select sname, city from S where city != "London";
++-----------+--------+
+| sname     | city   |
++-----------+--------+
+| Supplier2 | Paris  |
+| Supplier3 | Athens |
++-----------+--------+
+
+Display only the Cities from where the Suppliers come from. 
+
+mysql> select city from S;
++--------+
+| city   |
++--------+
+| London |
+| Paris  |
+| Athens |
++--------+
+
+Assuming that the Part Weight is in GRAMS, display the same in 
+MILLIGRAMS and KILOGRAMS.
+
+mysql> SELECT `P#`, pname, weight AS Grams, weight * 1000 AS Milligrams, weight / 1000 AS Kilograms FROM p;
++------+-------+--------+------------+-----------+
+| P#   | pname | Grams  | Milligrams | Kilograms |
++------+-------+--------+------------+-----------+
+| P1   | Part1 | 13.500 |  13500.000 | 0.0135000 |
+| P2   | Part2 | 11.800 |  11800.000 | 0.0118000 |
+| P3   | Part3 | 14.200 |  14200.000 | 0.0142000 |
++------+-------+--------+------------+-----------+
+
+
+
+
+
+
+
+
+
+
+
+ 

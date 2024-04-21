@@ -1,0 +1,110 @@
+Exercise 3:
+
+Display all the Supplier names with the initial letter capital.
+
+mysql> select concat(lower(substr(sname,1,1)),substr(sname,2)) from s;
++--------------------------------------------------+
+| concat(lower(substr(sname,1,1)),substr(sname,2)) |
++--------------------------------------------------+
+| supplier1                                        |
+| supplier2                                        |
+| supplier3                                        |
+| supplier4                                        |
++--------------------------------------------------+
+
+Display all the Supplier names in upper case. 
+
+mysql> select upper(sname) from s;
++--------------+
+| upper(sname) |
++--------------+
+| SUPPLIER1    |
+| SUPPLIER2    |
+| SUPPLIER3    |
+| SUPPLIER4    |
++--------------+
+
+Display all the Supplier names in lower case. 
+
+mysql> select lower(sname) from s;
++--------------+
+| lower(sname) |
++--------------+
+| supplier1    |
+| supplier2    |
+| supplier3    |
+| supplier4    |
++--------------+
+
+mysql> select lpad(sname,25,' ')  from s;
++---------------------------+
+| lpad(sname,25,' ')        |
++---------------------------+
+|                 Supplier1 |
+|                 Supplier2 |
+|                 Supplier3 |
+|                 supplier4 |
++---------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select replace(sname,'la','ro') from s;
++--------------------------+
+| replace(sname,'la','ro') |
++--------------------------+
+| Supplier1                |
+| Supplier2                |
+| Supplier3                |
+| supplier4                |
++--------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select replace(sname,'l','r') from s;
++------------------------+
+| replace(sname,'l','r') |
++------------------------+
+| Supprier1              |
+| Supprier2              |
+| Supprier3              |
+| supprier4              |
++------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select replace(replace(sname,'l','r'),'a','o') from s;
++-----------------------------------------+
+| replace(replace(sname,'l','r'),'a','o') |
++-----------------------------------------+
+| Supprier1                               |
+| Supprier2                               |
+| Supprier3                               |
+| supprier4                               |
++-----------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select replace(replace(sname,'l','r'),'s','p') from s;
++-----------------------------------------+
+| replace(replace(sname,'l','r'),'s','p') |
++-----------------------------------------+
+| Supprier1                               |
+| Supprier2                               |
+| Supprier3                               |
+| pupprier4                               |
++-----------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select sname as "Name", length(sname) as "Length" from s;
++-----------+--------+
+| Name      | Length |
++-----------+--------+
+| Supplier1 |      9 |
+| Supplier2 |      9 |
+| Supplier3 |      9 |
+| supplier4 |      9 |
++-----------+--------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+

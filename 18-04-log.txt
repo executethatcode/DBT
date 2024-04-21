@@ -1,0 +1,82 @@
+C:\Users\LENOVO>mysql -u prashant_alpha -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 60
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lakshya_alpha      |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use lakshya_alpha;
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_lakshya_alpha |
++-------------------------+
+| customers               |
+| orders                  |
+| salespeople             |
++-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table SEMP(
+    -> EMPNO char(40),
+    -> EMPNAME char(20),
+    -> BASIC float,
+    -> DEPTNO char(2),
+    -> DEPTHEAD char(4)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table SDEPT(
+    -> DEPTNO char(2),
+    -> DEPTNAME char(15)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_lakshya_alpha |
++-------------------------+
+| customers               |
+| orders                  |
+| salespeople             |
+| sdept                   |
+| semp                    |
++-------------------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into SDEPT(DEPTNO,DEPTNAME)
+    -> values ('10','Development'),('20','Training');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into SEMP (EMPNO,EMPNAME,BASIC,DEPTNO,DEPTHEAD)
+    -> values ('0001','SUNIL',6000,'10',),('0002','HIREN',8000,'20',),('0003','ALI',4000,'10','0001'),('0004','GEORGE',6000, ,'0002');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '),('0002','HIREN',8000,'20',),('0003','ALI',4000,'10','0001'),('0004','GEORGE',6' at line 2
+mysql> insert into SEMP (EMPNO,EMPNAME,BASIC,DEPTNO,DEPTHEAD) values ('0001','SUNIL',6000,'10',''),('0002','HIREN',8000,'20',''),('0003','ALI',4000,'10','0001'),('0004','GEORGE',6000,'' ,'0002');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+INSERT INTO S (`S#`, Sname, Status, City) VALUES ('S1', 'Supplier1', 10, 'London'), ('S2', 'Supplier2', 20, 'Paris'), ('S3', 'Supplier3', 30, 'Athens');
+
+INSERT INTO P (`P#`, Pname, Color, Weight, City) VALUES ('P1', 'Part1', 'Red', 13.5, 'London'), ('P2', 'Part2', 'Blue', 11.8, 'Paris'), ('P3', 'Part3', 'Green', 14.2, 'Athens');
+
+INSERT INTO J (`J#`, Jname, City) VALUES ('J1', 'Project1', 'Athens'),('J2', 'Project2', 'London'),('J3', 'Project3', 'Paris');
+
+INSERT INTO SPJ (`S#`, `P#`, `J#`, Qty) VALUES ('S1', 'P1', 'J1', 100), ('S2', 'P2', 'J2', 200), ('S3', 'P3', 'J3', 150);

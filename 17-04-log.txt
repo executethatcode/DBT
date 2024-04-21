@@ -1,0 +1,258 @@
+mysql> create schema lakshya_alpha;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create schema lakshya_beta;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create schema lakshya_gamma;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lakshya_alpha      |
+| lakshya_beta       |
+| lakshya_gamma      |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use lakshya_alpha;
+Database changed
+mysql> create user prashant_alpha@localhost identified by 'cdac';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lakshya_alpha      |
+| lakshya_beta       |
+| lakshya_gamma      |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use lakshya_alpha;
+Database changed
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lakshya_alpha      |
+| lakshya_beta       |
+| lakshya_gamma      |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+
+mysql> use mysql;
+Database changed
+mysql> select user from user;
++------------------+
+| user             |
++------------------+
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| prashant_alpha   |
+| root             |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> use lakshya_beta;
+Database changed
+mysql> create user prashant_beta@localhost identified by 'cdac';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> use lakshya_gamma;
+Database changed
+mysql> create user prashant_gamma@localhost identified by 'cdac';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant all privileges on lakshya_alpha.* to prashant_alpha@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant all privileges on lakshya_beta.* to prashant_beta@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all privileges on lakshya_gamma.* to prashant_gamma@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+====================================================================================================================
+
+ASSIGNMENT 1:
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lakshya_alpha      |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use lakshya_alpha;
+Database changed
+mysql> create table SALESPEOPLE (
+    -> Snum int(4),
+    -> Sname varchar(10),
+    -> City varchar(10),
+    -> Comm float(3,2)
+    -> );
+Query OK, 0 rows affected, 2 warnings (0.08 sec)
+
+mysql> create table CUSTOMERS (
+    -> Cnum int(4),
+    -> Cname varchar(10),
+    -> City varchar(10),
+    -> Rating int(4),
+    -> Snum int(4)
+    -> );
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+create table ORDERS ( Onum int(4),Amt float(7,2),Odate date,Cnum int(4),Snum int(4));
+
+
+mysql> insert into SALESPEOPLE (Snum, Sname, City, Comm)
+    -> values (1001, 'Peel', 'London', .12),(1002, 'Serres', 'San Jose', .13), (1004, 'Motika', 'London', .11),(1007, 'Rifkin','Barcelona',.15),(1003, 'Axelrod','New York',.10);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,18.69,03-OCT-1990,2008,1007);
+ERROR 1054 (42S22): Unknown column 'OCT' in 'field list'
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,18.69,03-10-1990,2008,1007);
+ERROR 1292 (22007): Incorrect date value: '-1997' for column 'Odate' at row 1
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,18.69,1990-10-02,2008,1007);
+ERROR 1292 (22007): Incorrect date value: '1978' for column 'Odate' at row 1
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,18.69,'1990-10-02',2008,1007);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,767.19,'03-OCT-1990',2001,1001);
+ERROR 1292 (22007): Incorrect date value: '03-OCT-1990' for column 'Odate' at row 1
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,767.19,'03-10-1990',2001,1001);
+ERROR 1292 (22007): Incorrect date value: '03-10-1990' for column 'Odate' at row 1
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3001,767.19,'1990-10-03',2001,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into ORDERS (Onum, Amt, Odate, Cnum, Snum) values (3002,1900.10,'1990-10-03',2007,1004),(3005,5160.45,'1990-10-03',2003,1002),(3006,1098.16,'1990-10-03',2008,1007),(3009,1713.23,'1990-10-04',2002,1003),(3007,75.75,'1990-10-04',2004,1002),(3008,4723.00,'1990-10-05',2006,1001),(3010,1309.95,'1990-10-06',2004,1002),(3011,9891.88,'1990-10-06',2006,1001);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from ORDERS;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-02 | 2008 | 1007 |
+| 3001 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> update orders
+    -> set Onum = 3003
+    -> where Amt = 767.19;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-02 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+mysql> show tables;
++-------------------------+
+| Tables_in_lakshya_alpha |
++-------------------------+
+| customers               |
+| orders                  |
+| salespeople             |
++-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customers;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1002 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-02 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> select * from salespeople;
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1004 | Motika  | London    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | Axelrod | New York  | 0.10 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
